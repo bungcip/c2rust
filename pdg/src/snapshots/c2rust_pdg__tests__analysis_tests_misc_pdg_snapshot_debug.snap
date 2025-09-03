@@ -1,6 +1,5 @@
 ---
 source: pdg/src/main.rs
-assertion_line: 376
 expression: pdg
 ---
 g is_null=false {
@@ -1080,4 +1079,3 @@ nodes_that_need_write = [1, 0]
 
 num_graphs = 80
 num_nodes = 755
-

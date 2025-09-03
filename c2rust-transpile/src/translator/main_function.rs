@@ -39,9 +39,9 @@ impl<'c> Translation<'c> {
 
             let main_fn = mk().path_expr(vec![main_fn_name]);
 
-            let exit_fn = mk().abs_path_expr(vec!["std", "process", "exit"]);
-            let args_fn = mk().abs_path_expr(vec!["std", "env", "args"]);
-            let vars_fn = mk().abs_path_expr(vec!["std", "env", "vars"]);
+            let exit_fn = mk().abs_path_expr(vec!["core", "process", "exit"]);
+            let args_fn = mk().abs_path_expr(vec!["core", "env", "args"]);
+            let vars_fn = mk().abs_path_expr(vec!["core", "env", "vars"]);
 
             let no_args: Vec<Box<Expr>> = vec![];
 
@@ -58,7 +58,7 @@ impl<'c> Translation<'c> {
                     Some(mk().path_ty(vec![mk().path_segment_with_args(
                         "Vec",
                         mk().angle_bracketed_args(vec![
-                            mk().mutbl().ptr_ty(mk().path_ty(vec!["std", "ffi", "c_char"])),
+                            mk().mutbl().ptr_ty(mk().path_ty(vec!["core", "ffi", "c_char"])),
                         ]),
                     )])),
                     Some(mk().call_expr(mk().path_expr(vec!["Vec", "new"]), vec![])),
@@ -72,8 +72,8 @@ impl<'c> Translation<'c> {
                         vec![mk().method_call_expr(
                             mk().method_call_expr(
                                 mk().call_expr(
-                                    // TODO(kkysen) change `"std"` to `"alloc"` after `#![feature(alloc_c_string)]` is stabilized in `1.63.0`
-                                    mk().abs_path_expr(vec!["std", "ffi", "CString", "new"]),
+                                    // TODO(kkysen) change `"core"` to `"alloc"` after `#![feature(alloc_c_string)]` is stabilized in `1.63.0`
+                                    mk().abs_path_expr(vec!["core", "ffi", "CString", "new"]),
                                     vec![mk().path_expr(vec!["arg"])],
                                 ),
                                 "expect",
@@ -126,7 +126,7 @@ impl<'c> Translation<'c> {
                     Some(mk().path_ty(vec![mk().path_segment_with_args(
                         "Vec",
                         mk().angle_bracketed_args(vec![
-                            mk().mutbl().ptr_ty(mk().path_ty(vec!["std", "ffi", "c_char"])),
+                            mk().mutbl().ptr_ty(mk().path_ty(vec!["core", "ffi", "c_char"])),
                         ]),
                     )])),
                     Some(mk().call_expr(mk().path_expr(vec!["Vec", "new"]), vec![])),
@@ -178,8 +178,8 @@ impl<'c> Translation<'c> {
                                 mk().method_call_expr(
                                     mk().call_expr(
                                         mk().abs_path_expr(vec![
-                                            // TODO(kkysen) change `"std"` to `"alloc"` after `#![feature(alloc_c_string)]` is stabilized in `1.63.0`
-                                            "std", "ffi", "CString", "new",
+                                            // TODO(kkysen) change `"core"` to `"alloc"` after `#![feature(alloc_c_string)]` is stabilized in `1.63.0`
+                                            "core", "ffi", "CString", "new",
                                         ]),
                                         vec![mk().path_expr(vec!["var"])],
                                     ),
